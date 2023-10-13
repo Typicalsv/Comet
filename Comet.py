@@ -48,9 +48,12 @@ def get_port_range():
             print(Fore.RED + '[CRIT ERROR] - port number have to be at least 1')
             sys.exit()
 
-        if stop > 65535:
+        elif stop > 65535:
             print(Fore.RED + '[CRIT ERROR] - maximum port is 65535')
             sys.exit()
+
+        elif start > stop:
+             print(Fore.RED + '[CRIT ERROR] - end port should be bigger value than start port')
 
         return start, stop
 
@@ -74,6 +77,23 @@ class Ishowspeed:
         print(Fore.BLUE+f"Upload speed: {upload_speed:.2f} Mbps")
         print('')
         return download_speed, upload_speed
+    
+class Scanner:
+    def __init__(self, ip_base, port):
+        self.ip_base = ip_base
+        self.port = port
+        self.active_hosts = []
+
+    def scan(self):
+        for i in range(1, 255):
+            target_ip = f"{self.ip_base}.{i}"
+            target = (target_ip, self.port)
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(0.00000001)
+            result = sock.connect_ex(target)
+            if result == 0:
+                self.active_hosts.append(target_ip)
+            sock.close()
 
      
 Clean()
@@ -90,22 +110,48 @@ Clean()
 
 
 if select == '1':
+
     print(Fore.GREEN+('-----Port Scanner-----'))
     print('')
     start, stop = get_port_range()
     port_scanner = Ports(lhost, start, stop, timeout)
     port_scanner.scan_ports()
+
 elif select == '2':
-        print(Fore.GREEN+'-----Speed Test (20s)-----')
+        print(Fore.GREEN+'-----Active Hosts-----')
+        print(Fore.RED+'   (May take long)')
         print('')
-        test = Ishowspeed()
-        test.Speed()
+        x = int(input(Fore.BLUE+'Enter port you want to search on for active hosts... '))
+        Clean()
+        print(Fore.GREEN+'-----Active Hosts-----')
+        print('')
+
+        if x < 1:
+            print(Fore.RED + '[CRIT ERROR] - port number have to be at least 1')
+            sys.exit()
+
+        elif x > 65535:
+            print(Fore.RED + '[CRIT ERROR] - maximum port is 65535')
+            sys.exit()
+
+             
+        scan = Scanner('10.0.0', x)
+        scan.scan()
+
+        if scan.active_hosts:
+            for host in scan.active_hosts:   
+             print(Fore.BLUE+'Active host: '+host)
+
 elif select == '3':
     print('Work in progress!')
     #TODO
 elif select == '4':
-    print('Work in progress!')
-    #TODO
+        
+        print(Fore.GREEN+'-----Speed Test (20s)-----')
+        print('')
+        test = Ishowspeed()
+        test.Speed()
+
 elif select == '5':
     print('Work in progress!')
     #TODO
