@@ -1,8 +1,8 @@
+from ipregistry import IpregistryClient
 from colorama import Fore
 from datetime import datetime
 import speedtest as speed
 import socket
-import time
 import sys
 import os
 
@@ -67,6 +67,7 @@ timeout = 0.00001
 class Ishowspeed:
 
     def Speed(self):
+
         st = speed.Speedtest()
         st.get_best_server()
 
@@ -79,12 +80,15 @@ class Ishowspeed:
         return download_speed, upload_speed
     
 class Scanner:
+
     def __init__(self, ip_base, port):
+
         self.ip_base = ip_base
         self.port = port
         self.active_hosts = []
 
     def scan(self):
+        
         for i in range(1, 255):
             target_ip = f"{self.ip_base}.{i}"
             target = (target_ip, self.port)
@@ -95,6 +99,46 @@ class Scanner:
                 self.active_hosts.append(target_ip)
             sock.close()
 
+class Cip:
+
+    def checkIp():
+
+        cos = input(Fore.BLUE+'Do you have client API key? (y/n)')
+        if(cos == 'n'): 
+            Clean()
+            print(Fore.GREEN+'Head to ipregistry.com -> register -> run this app again.')
+            sys.exit()
+
+        elif(cos == 'y'): 
+            Clean()
+            choice = input(Fore.BLUE+'Enter your API key:')
+
+            if(choice == ''):  
+
+                print(Fore.RED + '[CRIT ERROR] - Enter correct value')
+                sys.exit()
+
+        else: 
+            print(Fore.RED + '[CRIT ERROR] - Enter correct value')
+            sys.exit()
+
+        cli = IpregistryClient(choice)
+        choi  = input(Fore.BLUE+'Look up address of this machine or other? (m/o)')
+
+        if(choi == 'm'):
+
+            info = cli.lookup()
+            print(info)
+
+        elif(cos == 'o'): 
+           
+           addr = input(Fore.BLUE+'Enter address:')
+           infoo = cli.lookup(addr)
+           print(infoo)
+
+        else: 
+            print(Fore.RED + '[CRIT ERROR] - Enter correct value')
+            sys.exit()
      
 Clean()
 print(Fore.GREEN+'Welcome to Comet! ')
@@ -107,6 +151,7 @@ print(Fore.RED+'4. Speed test')
 print(Fore.RED+'5. Capture packets')
 select = input(Fore.BLUE+'Select function (1-5)... ')
 Clean()
+
 
 
 if select == '1':
@@ -143,8 +188,9 @@ elif select == '2':
              print(Fore.BLUE+'Active host: '+host)
 
 elif select == '3':
-    print('Work in progress!')
-    #TODO
+
+    Cip.checkIp()
+
 elif select == '4':
         
         print(Fore.GREEN+'-----Speed Test (20s)-----')
