@@ -14,3 +14,4 @@ It lets you check if specyfic ports are open or closed, it can conduct speed tes
 
 If all done correctly you should be able to use this program...
 
+Keep in mind that this is early stage of this project... so far its not very complicated.
