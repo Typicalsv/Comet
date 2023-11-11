@@ -1,6 +1,5 @@
 from ipregistry import IpregistryClient
 from colorama import Fore
-from datetime import datetime
 import speedtest as speed
 import socket
 import sys
@@ -62,7 +61,7 @@ def get_port_range():
 lhost = '127.0.0.1'
 timeout = 0.00001
 
-#test speed of the internet
+#conduct a speedtest
 
 class Ishowspeed:
 
@@ -78,6 +77,8 @@ class Ishowspeed:
         print(Fore.BLUE+f"Upload speed: {upload_speed:.2f} Mbps")
         print('')
         return download_speed, upload_speed
+    
+    #search for active hosts
     
 class Scanner:
 
@@ -98,6 +99,8 @@ class Scanner:
             if result == 0:
                 self.active_hosts.append(target_ip)
             sock.close()
+
+#search for IP details
 
 class Cip:
 
@@ -139,16 +142,15 @@ class Cip:
         else: 
             print(Fore.RED + '[CRIT ERROR] - Enter correct value')
             sys.exit()
-     
+
 Clean()
 print(Fore.GREEN+'Welcome to Comet! ')
 print(Fore.GREEN+'What would you like to do?')
 print('')
 print(Fore.RED+'1. Look for open ports')
 print(Fore.RED+'2. Identify active hosts')
-print(Fore.RED+'3. Listen for TCP/IP/HTTP movement')
+print(Fore.RED+'3. LookUp IP')
 print(Fore.RED+'4. Speed test')
-print(Fore.RED+'5. Capture packets')
 select = input(Fore.BLUE+'Select function (1-5)... ')
 Clean()
 
@@ -164,7 +166,7 @@ if select == '1':
 
 elif select == '2':
         print(Fore.GREEN+'-----Active Hosts-----')
-        print(Fore.RED+'   (May take long)')
+        print(Fore.RED+'   (May take longer)')
         print('')
         x = int(input(Fore.BLUE+'Enter port you want to search on for active hosts... '))
         Clean()
@@ -197,10 +199,6 @@ elif select == '4':
         print('')
         test = Ishowspeed()
         test.Speed()
-
-elif select == '5':
-    print('Work in progress!')
-    #TODO
 else: 
     print(Fore.RED+f'[CRIT ERROR] - There is no function such as: {select}')
     sys.exit()
