@@ -76,6 +76,7 @@ class Ishowspeed:
         print(Fore.BLUE+f"Download speed: {download_speed:.2f} Mbps")
         print(Fore.BLUE+f"Upload speed: {upload_speed:.2f} Mbps")
         print('')
+         
         return download_speed, upload_speed
     
     #search for active hosts
@@ -144,6 +145,7 @@ class Cip:
             sys.exit()
 
 Clean()
+
 print(Fore.GREEN+'Welcome to Comet! ')
 print(Fore.GREEN+'What would you like to do?')
 print('')
@@ -151,7 +153,8 @@ print(Fore.RED+'1. Look for open ports')
 print(Fore.RED+'2. Identify active hosts')
 print(Fore.RED+'3. LookUp IP')
 print(Fore.RED+'4. Speed test')
-select = input(Fore.BLUE+'Select function (1-5)... ')
+select = input(Fore.BLUE+'Select function (1-4)... ')
+
 Clean()
 
 
