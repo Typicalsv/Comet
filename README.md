@@ -6,7 +6,7 @@ Using few libraries and API i created simple TUI controled app that may help you
 It lets you check if specyfic ports are open or closed, it can conduct speed test of your internet and more.
 
 # Setup
-1. Make sure you have python installed ( python -V )
+1. Make sure you have python installed ``python -V ``
 2. Download Comet.py
 3. In terminal run following command - > ``pip install colorama, ipregistry, speedtest-cli``
 4. Navigate to the projects folder using ``cd (name of the next folder in path)``
