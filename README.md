@@ -28,3 +28,5 @@ python Comet.py
 If all done correctly you should be able to use this program...
 
 Keep in mind that this is early stage of this project... so far its not very complicated.
+
+## Feel free to visit my [website](http://typical.ct8.pl)
